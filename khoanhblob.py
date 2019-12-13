@@ -6,7 +6,7 @@ import numpy as np
 import sys
 
 # 画像の読み込み
-img = cv2.imread('dautach.jpg')
+img = cv2.imread('dautach1.jpg')
 
 # グレースケール化
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -46,4 +46,4 @@ for i in range(n):
     cv2.putText(color_src, "Y: " + str(int(center[i][1])), (x1 - 10, y1 + 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 255))
 
 # 画像の保存
-cv2.imwrite('khoanhblob.jpg', color_src)
+cv2.imwrite('khoanhblob1.jpg', color_src)
