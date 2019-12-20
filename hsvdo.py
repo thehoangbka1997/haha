@@ -6,13 +6,13 @@ from time import sleep
 
 # メイン関数
 def main():
-    image = cv2.imread('1dau.jpg') # ファイル読み込み
+    image = cv2.imread('dau.jpg') # ファイル読み込み
 
     # HSVでの色抽出
     hsvLower = np.array([0, 100, 0])    # 抽出する色の下限
     hsvUpper = np.array([5, 255, 255])    # 抽出する色の上限
     hsvResult = hsvExtraction(image, hsvLower, hsvUpper)
-    cv2.imwrite('dautach1.jpg', hsvResult)
+    cv2.imwrite('dau8.jpg', hsvResult)
     sleep(1)
 
     while True:
