@@ -1,0 +1,7 @@
+<launch> 
+  <node pkg="rosbag" type="play" name="player" output="screen" args="/home/ubuntu/2019-12-20-05-51-50.bag" required="true" />
+  <node pkg="pimouse_vision_control" name="red" type="red.py" output="screen" />
+            
+  <node pkg="web_video_server" name="web_video_server" type="web_video_server" >
+  </node>
+</launch>
