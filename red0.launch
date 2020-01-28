@@ -7,5 +7,5 @@
   <node pkg="web_video_server" name="web_video_server" type="web_video_server" >
   </node>   
             
-  <node pkg="pimouse_vision_control" name="red" type="red.py" output="screen" />
+  <node pkg="pimouse_vision_control" name="red1" type="red1.py" output="screen" />
 </launch>

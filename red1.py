@@ -13,11 +13,10 @@ class Redtracking():
         self.image_org = None
 
     def monitor(self,org):  
-        hsv = cv2.cvtColor(org, cv2.COLOR_BGR2HSV) # 画像をHSVに変換                         
-        hsvLower = np.array([0, 100, 0])    # 抽出する色の下限
-        hsvUpper = np.array([5, 255, 255])    # 抽出する色の上限
-        hsv_mask = cv2.inRange(hsv, hsvLower, hsvUpper)    # HSVからマスクを作成
-        org1 = cv2.bitwise_and(org, org, mask=hsv_mask)
+        bgrLower = np.array([17, 15, 150])    # 抽出する色の下限
+        bgrUpper = np.array([128, 191, 255])    # 抽出する色の上限
+        img_mask = cv2.inRange(org, bgrLower, bgrUpper)
+        org1 = cv2.bitwise_and(org, org, mask=img_mask)
     # グレースケール変換
         gray = cv2.cvtColor(org1, cv2.COLOR_BGR2GRAY)
 

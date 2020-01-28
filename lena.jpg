@@ -1,0 +1,11 @@
+--2020-01-28 07:12:45--  https://raw.githubusercontent.com/nkmk/python-snippets/master/notebook/data/src/lena.jpg
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.88.133
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.88.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 32468 (32K) [image/jpeg]
+Saving to: ‘lena.jpg.1’
+
+     0K .......... .......... .......... .                    100% 2.25M=0.01s
+
+2020-01-28 07:12:46 (2.25 MB/s) - ‘lena.jpg.1’ saved [32468/32468]
+
