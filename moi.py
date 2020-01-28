@@ -12,43 +12,37 @@ class FaceToFace():
         self.bridge = CvBridge()
         self.image_org = None
 
-    def monitor(self,org):  
-        hsv = cv2.cvtColor(org, cv2.COLOR_BGR2HSV) # 画像をHSVに変換                         
-        hsvLower = np.array([0, 100, 0])    # 抽出する色の下限
-        hsvUpper = np.array([5, 255, 255])    # 抽出する色の上限
-        hsv_mask = cv2.inRange(hsv, hsvLower, hsvUpper)    # HSVからマスクを作成
-        org1 = cv2.bitwise_and(org, org, mask=hsv_mask)
+    def monitor(self,org):                                 #このメソッドを追加
+        bgrLower = np.array([17, 15, 150])    # 抽出する色の下限
+        bgrUpper = np.array([128, 191, 255])    # 抽出する色の上限
+        img_mask = cv2.inRange(org, bgrLower, bgrUpper)
+        if img_mask is not None:
+
+            org1 = cv2.bitwise_and(org, org, mask=img_mask)
     # グレースケール変換
-        gray = cv2.cvtColor(org1, cv2.COLOR_BGR2GRAY)
+            gray = cv2.cvtColor(org1, cv2.COLOR_BGR2GRAY)
 
     # 2値化
-        gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+            gray = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
 
     # ラベリング処理
-        label = cv2.connectedComponentsWithStats(gray)
+            label = cv2.connectedComponentsWithStats(gray)
 
     # ブロブ情報を項目別に抽出
-        n = label[0] - 1   #　ブロブの数
-        data = np.delete(label[2], 0, 0)
-        center = np.delete(label[3], 0, 0)  
-
+            n = label[0] - 1
+            data = np.delete(label[2], 0, 0)
+            center = np.delete(label[3], 0, 0)  
+        
     # ブロブ面積最大のインデックス
-        try:
             max_index = np.argmax(data[:,4])
 
     # 面積最大ブロブの各種情報を表示
-            global center_max
-            center_max = center[max_index]
             x1 = data[:,0][max_index]
             y1 = data[:,1][max_index]
-            x2 = x1 + data[:,2][max_index]  # x1 + 幅
-            y2 = y1 + data[:,3][max_index]  # y2 + 高さ
-            a = data[:,4][max_index]        # 面積
-            org = cv2.rectangle(org1, (x1, y1), (x2, y2), (0, 0, 255))
-        except ValueError:
-            pass
-        self.pub.publish(self.bridge.cv2_to_imgmsg(org, "bgr8"))
-        
+            x2 = x1 + data[:,2][max_index]
+            y2 = y1 + data[:,3][max_index]
+            blob = cv2.rectangle(org1, (x1, y1), (x2, y2), (0, 0, 255))
+            self.pub.publish(self.bridge.cv2_to_imgmsg(blob, "bgr8"))
    
     def get_image(self,img):
         try:
@@ -63,8 +57,7 @@ class FaceToFace():
         org = self.image_org
     
         self.monitor(org)   
-        return center_max
-       
+        return None
 if __name__ == '__main__':
     rospy.init_node('face_to_face')
     fd = FaceToFace()
