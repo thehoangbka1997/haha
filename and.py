@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import cv2
 src1 = cv2.imread('lena.jpg')
-src2 = cv2.imread('ngua.jpg')
+src2 = cv2.imread('horse_r.png')
 
 src2 = cv2.resize(src2, src1.shape[1::-1])
 
