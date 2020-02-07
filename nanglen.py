@@ -25,9 +25,9 @@ RESOLUTION = {'Full': (0, 0, 0),
               '1/16': (0, 0, 1),
               '1/32': (1, 0, 1)}
 
-GPIO.output(MODE, RESOLUTION['1/4'])
+GPIO.output(MODE, RESOLUTION['Full'])
 
-step_count = SPR * 4
+step_count = SPR * 1
 delay = .005 / 4
 
 for x in range(step_count):
@@ -46,7 +46,7 @@ for x in range(step_count):
 DIR2 = 23       # Direction GPIO Pin
 STEP2 = 24      # Step GPIO Pin
 GPIO.output(MODE, RESOLUTION['Full'])
-step_count2 = SPR * 2
+step_count2 = SPR * 1
 for x in range(step_count):
     GPIO.output(STEP, GPIO.HIGH)
     sleep(delay)
